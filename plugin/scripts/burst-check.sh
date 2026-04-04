@@ -1,0 +1,1 @@
+../../shared/scripts/burst-check.sh

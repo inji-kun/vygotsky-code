@@ -1,0 +1,1 @@
+../../shared/scripts/stop-hook.sh

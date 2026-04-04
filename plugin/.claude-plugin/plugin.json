@@ -1,0 +1,10 @@
+{
+  "name": "vygotsky-code",
+  "description": "Theory-building coding partner — ensures you understand the code being written",
+  "version": "0.4.0",
+  "author": { "name": "inji-kun" },
+  "license": "MIT",
+  "homepage": "https://github.com/inji-kun/vygotsky",
+  "repository": "https://github.com/inji-kun/vygotsky",
+  "keywords": ["theory-building", "learning", "pedagogy", "skills", "debugging", "tdd", "planning"]
+}
