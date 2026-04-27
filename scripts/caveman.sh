@@ -24,7 +24,15 @@ get_caveman_level() {
     case "$raw" in
       off|lite|full) echo "$raw"; return 0 ;;
       "") ;; # empty file — fall through to env var
-      *) echo "caveman: invalid value '$raw' in $state_file, falling back to off" >&2 ;;
+      *)
+        # Invalid content in the state file is a hard fall to off, not a
+        # fall-through. The state file is set by an explicit /caveman action;
+        # garbage there means something corrupted it, so fail safe rather than
+        # silently honoring a stale env var.
+        echo "caveman: invalid value '$raw' in $state_file, falling back to off" >&2
+        echo "off"
+        return 0
+        ;;
     esac
   fi
 

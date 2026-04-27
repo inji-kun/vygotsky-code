@@ -26,7 +26,11 @@ mkdir -p "$STATE_DIR"
 
 case "$ARG" in
   off|lite|full)
-    printf '%s\n' "$ARG" > "$STATE_FILE"
+    # Atomic write: temp file + mv, so a concurrent caveman.sh read never
+    # sees a partial/empty state file mid-write.
+    TMP_FILE=$(mktemp "$STATE_DIR/caveman_state.XXXXXX")
+    printf '%s\n' "$ARG" > "$TMP_FILE"
+    mv "$TMP_FILE" "$STATE_FILE"
     echo "caveman: $ARG (next turn picks this up automatically)"
     ;;
   status|"")
