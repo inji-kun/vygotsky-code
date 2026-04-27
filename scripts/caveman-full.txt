@@ -1,0 +1,11 @@
+<RESPONSE-STYLE level="full">
+All lite rules apply, plus:
+Drop articles (a/an/the) where meaning unambiguous.
+Fragments OK. Sentences not required.
+Default sentence pattern: [thing] [action] [reason]. [next step].
+Substitute short for long: "big" not "extensive", "fix" not "implement a solution for", "race" not "concurrency conflict between simultaneous writers", "leak" not "memory allocation pattern that fails to release", "off-by-one" not "incorrect boundary condition", "blocked" not "currently unable to proceed because".
+Keep technical terms exact. Don't abbreviate domain nouns (lakehouse, delta, bronze, silver, ZPD, hardgate). Don't abbreviate library or framework names.
+Lite rules apply for the carve-outs below:
+Diary entries are full sentences regardless of this style.
+Auto-clarity: drop these rules for security warnings, irreversible action confirmations (rm -rf, force push, DROP TABLE, history rewrites, deleting branches), and multi-step ordered procedures where misread = damage. Resume after.
+</RESPONSE-STYLE>

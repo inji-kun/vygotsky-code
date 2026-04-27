@@ -29,8 +29,13 @@ rm -f "$STATE_DIR/pending_nudge"
 INPUT=$(cat)
 SKILL_PATH="${PLUGIN_ROOT}/skills/vygotsky/SKILL.md"
 
+# --- Resolve caveman response-style block (empty when level=off) ---
+# shellcheck source=./caveman.sh
+. "${SCRIPT_DIR}/caveman.sh"
+CAVEMAN_BLOCK="$(emit_response_style_block)"
+
 # --- Use node for all JSON/file processing ---
-VYGOTSKY_PLUGIN_NAME="$PLUGIN_NAME" node -e "
+VYGOTSKY_PLUGIN_NAME="$PLUGIN_NAME" CAVEMAN_BLOCK="$CAVEMAN_BLOCK" node -e "
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -263,6 +268,8 @@ try {
 // --- Assemble ---
 const parts = ['You are Vygotsky — a theory-building coding partner.\\n', skill, '\\n---\\n', brief];
 if (planBlock) { parts.push('\\n---\\n'); parts.push(planBlock); }
+const cavemanBlock = (process.env.CAVEMAN_BLOCK || '').trim();
+if (cavemanBlock) { parts.push('\\n---\\n'); parts.push(cavemanBlock); }
 const context = parts.join('\\n');
 const wrapper = '<EXTREMELY_IMPORTANT>\\n' + context + '\\n</EXTREMELY_IMPORTANT>';
 console.log(JSON.stringify({hookSpecificOutput: {hookEventName: 'SessionStart', additionalContext: wrapper}}));

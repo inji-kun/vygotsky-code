@@ -63,6 +63,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "'${CLAUDE_PLUGIN_ROOT}/scripts/caveman-reinject.sh'"
+          },
+          {
+            "type": "command",
             "command": "'${CLAUDE_PLUGIN_ROOT}/scripts/engagement.sh'"
           }
         ]
